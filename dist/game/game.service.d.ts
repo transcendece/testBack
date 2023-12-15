@@ -1,0 +1,38 @@
+import { Engine, Runner, Body, Vector } from 'matter-js';
+import { Socket } from "socket.io";
+import { gameMaps, gameMods } from "src/DTOs/game/game.dto";
+export declare class GameService {
+    id: string;
+    player1Id: string;
+    player2Id: string;
+    mode: gameMods;
+    map: gameMaps;
+    serve: boolean;
+    client1: Socket;
+    client2: Socket;
+    engine: Engine;
+    runner: Runner;
+    ball: Body;
+    p1: Body;
+    p2: Body;
+    grounds: Body[];
+    obstacles: Body[];
+    isRunning: boolean;
+    maxVelocity: number;
+    score1: number;
+    score2: number;
+    maxScore: number;
+    maxTime: number;
+    constructor(client: Socket, gameId: string, map: gameMaps, mode: gameMods);
+    startGame(): void;
+    setPlayer1(sock: Socket, id: string): void;
+    setPlayer2(sock: Socket, id: string): void;
+    getPlayer1(): Socket;
+    getPlayer2(): Socket;
+    ifPlayerInGame(id: string): boolean;
+    reverseVector(vector: Vector): Vector;
+    checkBallPosition(): void;
+    spownBall(): void;
+    stop(): void;
+    run(): void;
+}
